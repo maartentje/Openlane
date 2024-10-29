@@ -1,17 +1,14 @@
+using BL;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Openlane.Pages;
 
-public class IndexModel : PageModel
+public class IndexModel(IOfferService offerService, ILogger<IndexModel> logger) : PageModel
 {
-    private readonly ILogger<IndexModel> _logger;
-
-    public IndexModel(ILogger<IndexModel> logger)
-    {
-        _logger = logger;
-    }
-
     public void OnGet()
     {
+        logger.LogInformation("OnGet");
+        var res = offerService.GetOffers();
+        ViewData["offers"] = res;
     }
 }

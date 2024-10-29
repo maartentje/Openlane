@@ -1,7 +1,12 @@
+using BL;
+using DAL;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddScoped<IOfferService, OfferService>();
+builder.Services.AddScoped<IOfferRepository, OfferRepository>();
 
 var app = builder.Build();
 
@@ -15,6 +20,8 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
+app.MapControllers();
 
 app.UseRouting();
 

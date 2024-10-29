@@ -2,6 +2,12 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Openlane", "Openlane\Openlane.csproj", "{79EAEAA3-5732-4DA2-B5BC-5ABAE1B6EAEA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{6188D2B8-22C2-4DA2-ADE8-A62CEAD1B6FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BL", "BL\BL.csproj", "{7E4C49A3-E2F4-44F2-82B0-78237D35E350}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{852A567E-656A-4EB3-8F75-A0206228F3C6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +18,17 @@ Global
 		{79EAEAA3-5732-4DA2-B5BC-5ABAE1B6EAEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79EAEAA3-5732-4DA2-B5BC-5ABAE1B6EAEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{79EAEAA3-5732-4DA2-B5BC-5ABAE1B6EAEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6188D2B8-22C2-4DA2-ADE8-A62CEAD1B6FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6188D2B8-22C2-4DA2-ADE8-A62CEAD1B6FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6188D2B8-22C2-4DA2-ADE8-A62CEAD1B6FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6188D2B8-22C2-4DA2-ADE8-A62CEAD1B6FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E4C49A3-E2F4-44F2-82B0-78237D35E350}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E4C49A3-E2F4-44F2-82B0-78237D35E350}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E4C49A3-E2F4-44F2-82B0-78237D35E350}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E4C49A3-E2F4-44F2-82B0-78237D35E350}.Release|Any CPU.Build.0 = Release|Any CPU
+		{852A567E-656A-4EB3-8F75-A0206228F3C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{852A567E-656A-4EB3-8F75-A0206228F3C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{852A567E-656A-4EB3-8F75-A0206228F3C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{852A567E-656A-4EB3-8F75-A0206228F3C6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
