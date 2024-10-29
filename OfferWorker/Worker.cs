@@ -2,20 +2,25 @@ using BL;
 
 namespace OfferWorker;
 
-public class Worker(ILogger<Worker> logger, IOfferService offerService, IQueueService queueService) : BackgroundService
+public class Worker(ILogger<Worker> logger, IQueueService queueService) : BackgroundService
 {
-    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+    protected override Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        queueService.Listen();
-        while (!stoppingToken.IsCancellationRequested)
-        {
-            if (logger.IsEnabled(LogLevel.Information))
-            {
-                var res = offerService.GetOffers();
-                //logger.LogInformation("Worker running - name: {name} at: {time}", res.First().Id, DateTimeOffset.Now);
-            }
+        logger.LogInformation("Worker started at: {time}", DateTimeOffset.Now);
+        Listen();
+        return Task.CompletedTask;
+    }
 
-            await Task.Delay(1000, stoppingToken);
+    private void Listen()
+    {
+        try
+        {
+            queueService.Listen();
+        }
+        catch (Exception e)
+        {
+            logger.LogError("Error while starting worker (retrying): {e}", e.Message);
+            Listen();
         }
     }
 }

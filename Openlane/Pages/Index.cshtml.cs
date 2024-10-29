@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Openlane.Pages;
 
-public class IndexModel(IQueueService queueService, ILogger<IndexModel> logger) : PageModel
+public class IndexModel(ILogger<IndexModel> logger, IQueueService queueService) : PageModel
 {
     public void OnGet()
     {
@@ -19,7 +19,7 @@ public class IndexModel(IQueueService queueService, ILogger<IndexModel> logger) 
         {
             Id = "From UI-Portal",
             Price = 100.5d,
-            State = State.New,
+            State = State.Open,
         };
         
         queueService.PostToQueue(offer);

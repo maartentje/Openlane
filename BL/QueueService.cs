@@ -17,11 +17,14 @@ public class QueueService : IQueueService
 {
     private readonly IModel _channel;
     private readonly ILogger<QueueService> _logger;
+    private readonly IOfferService _offerService;
     
-    public QueueService(ILogger<QueueService> logger)
+    public QueueService(ILogger<QueueService> logger, IOfferService offerService)
     {
         _logger = logger;
-        _logger.LogInformation("Connecting to RabbitMQ...");
+        _offerService = offerService;
+        
+        _logger.LogInformation("Connecting to RabbitMQ");
 
         var factory = new ConnectionFactory
         {
@@ -44,7 +47,7 @@ public class QueueService : IQueueService
             routingKey: "default",
             basicProperties: null,
             body: body);
-        _logger.LogInformation(" ====> Published {json} to RabbitMQ", jsonString);
+        _logger.LogInformation("Posted to queue: {json}", jsonString);
     }
     
     public void Listen()
@@ -54,8 +57,10 @@ public class QueueService : IQueueService
         {
             var body = ea.Body.ToArray();
             var message = Encoding.UTF8.GetString(body);
-            _logger.LogInformation(" ====> Received {msg}", message);
-            var offer = JsonSerializer.Deserialize<Offer>(message);
+            _logger.LogInformation("Received on queue: {msg}", message);
+            var offer = JsonSerializer.Deserialize<Offer>(message)!;
+            //TODO error handling
+            _offerService.ProcessOffer(offer);
         };
         _channel.BasicConsume(queue: "default",
             autoAck: true,

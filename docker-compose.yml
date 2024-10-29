@@ -6,6 +6,8 @@
     build:
       context: .
       dockerfile: OfferWorker/Dockerfile
+    environment:
+      - MSSQL_SA_PASSWORD=Password1*
     restart: on-failure
     depends_on:
       - rabbitmq
@@ -21,8 +23,7 @@
     depends_on:
       - rabbitmq
     ports:
-      - "5000:5000"
-      - "5001:5001"
+      - "5000:8080"
       
   rabbitmq:
     image: rabbitmq:3-management
@@ -32,3 +33,11 @@
     ports:
       - "5672:5672"
       - "15672:15672"
+    
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=Password1*
+    ports:
+      - "1433:1433"

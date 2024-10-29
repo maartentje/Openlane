@@ -5,14 +5,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-builder.Services.AddScoped<IOfferService, OfferService>();
-builder.Services.AddScoped<IOfferRepository, OfferRepository>();
+builder.Services.AddTransient<IOfferService, OfferService>();
+builder.Services.AddTransient<IOfferRepository, OfferRepository>();
 
 builder.Services.AddSingleton<IQueueService, QueueService>();
 
 var app = builder.Build();
-
-app.Urls.Add("http://*:5000");
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
