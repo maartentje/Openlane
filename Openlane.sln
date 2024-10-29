@@ -8,6 +8,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BL", "BL\BL.csproj", "{7E4C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{852A567E-656A-4EB3-8F75-A0206228F3C6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OfferWorker", "OfferWorker\OfferWorker.csproj", "{FDE31E97-BD00-403D-B74E-670924D91782}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4958850B-C104-4F79-9468-D3BD8ED4211C}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +37,9 @@ Global
 		{852A567E-656A-4EB3-8F75-A0206228F3C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{852A567E-656A-4EB3-8F75-A0206228F3C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{852A567E-656A-4EB3-8F75-A0206228F3C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDE31E97-BD00-403D-B74E-670924D91782}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDE31E97-BD00-403D-B74E-670924D91782}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDE31E97-BD00-403D-B74E-670924D91782}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDE31E97-BD00-403D-B74E-670924D91782}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

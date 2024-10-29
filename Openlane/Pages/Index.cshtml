@@ -7,8 +7,7 @@
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
 
-    @using (Html.BeginForm("Index", "Index"))
-    {
-        <button type="submit" class="btn btn-primary">Submit</button>
-    }
+    <form asp-page-handler="sendMessage" method="post">
+        <button class="btn btn-default">SendMessage</button>
+    </form>
 </div>
