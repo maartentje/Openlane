@@ -10,7 +10,7 @@ public class ApiController(ILogger<ApiController> logger, IQueueService queueSer
 {
     [Route("sendMessage")]
     [HttpPost]
-    public ActionResult SendMessage([FromBody] OfferDto? dto)
+    public ActionResult SendMessage([FromBody] OfferDto? dto, CancellationToken ct)
     {
         logger.LogInformation("Request received at '/api/sendMessage'");
         if (dto == null)

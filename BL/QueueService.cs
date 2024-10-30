@@ -11,7 +11,7 @@ namespace BL;
 public interface IQueueService
 {
     void PostToQueue(Offer offer);
-    void Listen();
+    void Listen(CancellationToken ct);
 }
 
 public class QueueService : IQueueService
@@ -28,7 +28,7 @@ public class QueueService : IQueueService
         _logger.LogInformation("Creating RabbitMQ connection...");
         try
         {
-            CreateConnection();
+            CreateConnection(0);
         }
         catch (Exception e)
         {
@@ -36,7 +36,7 @@ public class QueueService : IQueueService
         }
     }
 
-    private void CreateConnection(int retries = 0)
+    private void CreateConnection(int retries = 0, CancellationToken ct = default)
     {
         try
         {
@@ -56,16 +56,16 @@ public class QueueService : IQueueService
         catch (BrokerUnreachableException e)
         {
             _logger.LogWarning("Could not connect to RabbitMQ: {e}", e.Message);
-            Task.Delay(1000 * retries).Wait();
+            Task.Delay(1000 * retries, ct).Wait(ct);
 
             if (retries >= 10)
                 throw;
 
-            CreateConnection(retries + 1);
+            CreateConnection(retries + 1, ct);
         }
     }
 
-    public void Listen()
+    public void Listen(CancellationToken ct)
     {
         var consumer = new EventingBasicConsumer(_channel);
         consumer.Received += (_, ea) =>
@@ -74,7 +74,10 @@ public class QueueService : IQueueService
             var message = Encoding.UTF8.GetString(body);
             var offer = JsonSerializer.Deserialize<Offer>(message)!;
             _logger.LogInformation("[{id}] Received on queue", offer.Id);
-            _offerService.ProcessOffer(offer);
+            //The only reason to Wait() is to simulate 'long processing time'
+            //This way, it won't process the next message when the first one is still busy
+            //Easier to demo - logs show new process every ~5 seconds, but with multiple replicas it shows multiple process
+            _offerService.ProcessOffer(offer, ct).Wait(ct);
         };
         _channel.BasicConsume(queue: "default",
             autoAck: true,
