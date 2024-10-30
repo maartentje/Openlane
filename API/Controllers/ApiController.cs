@@ -27,7 +27,7 @@ public class ApiController(ILogger<ApiController> logger, IQueueService queueSer
             State = (State)dto.State,
         };
 
-        logger.LogInformation("Send message ({id})", dto.Id);
+        logger.LogInformation("[{id}] Send message", dto.Id);
         queueService.PostToQueue(offer);
         return Ok();
     }

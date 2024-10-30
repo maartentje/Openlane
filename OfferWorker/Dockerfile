@@ -6,6 +6,10 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["OfferWorker/OfferWorker.csproj", "OfferWorker/"]
+COPY ["BL/BL.csproj", "BL/"]
+COPY ["DAL/DAL.csproj", "DAL/"]
+COPY ["Domain/Domain.csproj", "Domain/"]
+COPY ["Shared/Shared.csproj", "Shared/"]
 RUN dotnet restore "OfferWorker/OfferWorker.csproj"
 COPY . .
 WORKDIR "/src/OfferWorker"
