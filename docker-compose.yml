@@ -2,7 +2,7 @@
   offerworker:
     image: offerworker
     deploy:
-      replicas: 1
+      replicas: 5
     build:
       context: .
       dockerfile: OfferWorker/Dockerfile
@@ -12,13 +12,11 @@
     depends_on:
       - rabbitmq
     
-  openlane:
-    image: openlane
-    deploy:
-      replicas: 1
+  api:
+    image: api
     build:
       context: .
-      dockerfile: Openlane/Dockerfile
+      dockerfile: API/Dockerfile
     restart: on-failure
     depends_on:
       - rabbitmq

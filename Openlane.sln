@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Openlane", "Openlane\Openlane.csproj", "{79EAEAA3-5732-4DA2-B5BC-5ABAE1B6EAEA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "API\API.csproj", "{79EAEAA3-5732-4DA2-B5BC-5ABAE1B6EAEA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{6188D2B8-22C2-4DA2-ADE8-A62CEAD1B6FA}"
 EndProject
@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		docker-compose.yml = docker-compose.yml
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{B59D88A7-A30E-43CA-B737-502F6875B839}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,5 +43,9 @@ Global
 		{FDE31E97-BD00-403D-B74E-670924D91782}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FDE31E97-BD00-403D-B74E-670924D91782}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FDE31E97-BD00-403D-B74E-670924D91782}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B59D88A7-A30E-43CA-B737-502F6875B839}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B59D88A7-A30E-43CA-B737-502F6875B839}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B59D88A7-A30E-43CA-B737-502F6875B839}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B59D88A7-A30E-43CA-B737-502F6875B839}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

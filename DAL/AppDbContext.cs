@@ -1,5 +1,5 @@
 using System.Reflection;
-using Domain;
+using Domain.Model;
 using Microsoft.EntityFrameworkCore;
 
 namespace DAL;
