@@ -24,7 +24,7 @@ public class OfferRepository(ILogger<OfferRepository> logger, IServiceProvider s
 
     public async Task Create(Offer offer, CancellationToken ct)
     {
-        logger.LogInformation("[{id}] Creating", offer.Id);
+        logger.LogInformation("[{id}] Creating", offer.IdOutdated);
         using var scope = serviceProvider.CreateScope();
         var dbContext = scope.ServiceProvider.GetService<AppDbContext>()!;
         await dbContext.Offers.AddAsync(offer, ct);
@@ -33,7 +33,7 @@ public class OfferRepository(ILogger<OfferRepository> logger, IServiceProvider s
 
     public async Task Update(Offer offer, CancellationToken ct)
     {
-        logger.LogInformation("[{id}] Updating", offer.Id);
+        logger.LogInformation("[{id}] Updating", offer.IdOutdated);
         using var scope = serviceProvider.CreateScope();
         var dbContext = scope.ServiceProvider.GetService<AppDbContext>()!;
         dbContext.Entry(offer).State = EntityState.Modified;

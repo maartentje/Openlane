@@ -13,22 +13,22 @@ public class OfferService(ILogger<OfferService> logger, IOfferRepository offerRe
 {
     public async Task ProcessOffer(Offer offer, CancellationToken ct)
     {
-        logger.LogInformation("[{id}] Start processing", offer.Id);
+        logger.LogInformation("[{id}] Start processing", offer.IdOutdated);
         //could do anything here as 'processing'
         //for now we 'fake' the processing time
         await Task.Delay(4_000, ct).WaitAsync(ct);
-        logger.LogInformation("[{id}] Processed", offer.Id);
+        logger.LogInformation("[{id}] Processed", offer.IdOutdated);
 
-        var existing = await offerRepository.GetById(offer.Id, ct);
+        var existing = await offerRepository.GetById(offer.IdOutdated, ct);
         if (existing == null)
         {
             await offerRepository.Create(offer, ct);
-            logger.LogInformation("[{id}] Created", offer.Id);
+            logger.LogInformation("[{id}] Created", offer.IdOutdated);
         }
         else
         {
             await offerRepository.Update(offer, ct);
-            logger.LogInformation("[{id}] Updated", offer.Id);
+            logger.LogInformation("[{id}] Updated", offer.IdOutdated);
         }
     }
 }

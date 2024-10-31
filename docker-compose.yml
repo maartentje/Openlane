@@ -1,5 +1,18 @@
 ﻿services:
-  offerworker:
+  worker-base:
+    image: offerworker
+    build:
+      context: .
+      dockerfile: OfferWorker/Dockerfile
+    environment:
+      - MSSQL_SA_PASSWORD=Password1*
+      - EnsureCreated=true
+    restart: on-failure
+    depends_on:
+      - rabbitmq
+  
+  # This way, the scaled workers won't try EnsureCreated()
+  worker-extra:
     image: offerworker
     deploy:
       replicas: 3
@@ -11,7 +24,8 @@
     restart: on-failure
     depends_on:
       - rabbitmq
-    
+      - worker-base
+  
   api:
     image: api
     build:

@@ -7,6 +7,7 @@ namespace DAL;
 public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
 {
     public DbSet<Offer> Offers { get; set; }
+    public DbSet<Car> Cars { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

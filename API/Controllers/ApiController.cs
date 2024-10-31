@@ -8,6 +8,14 @@ namespace API.Controllers;
 [Route("[controller]")]
 public class ApiController(ILogger<ApiController> logger, IQueueService queueService) : Controller
 {
+    [HttpPost("car")]
+    public ActionResult CreateCar([FromBody] CarDto? dto, CancellationToken ct)
+    {
+        logger.LogInformation("Request received at '/api/CreateCar'");
+       
+        return Ok();
+    }
+    
     [Route("sendMessage")]
     [HttpPost]
     public ActionResult SendMessage([FromBody] OfferDto? dto, CancellationToken ct)
@@ -22,7 +30,7 @@ public class ApiController(ILogger<ApiController> logger, IQueueService queueSer
 
         var offer = new Offer
         {
-            Id = dto.Id,
+            IdOutdated = dto.Id,
             Price = dto.Price,
             State = (State)dto.State,
         };

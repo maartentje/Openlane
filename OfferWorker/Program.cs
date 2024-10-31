@@ -13,7 +13,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     var connectionString = builder.Configuration.GetConnectionString("Default")!;
     var password = Environment.GetEnvironmentVariable("MSSQL_SA_PASSWORD");
     connectionString = string.Format(connectionString, password);
-    
+
     options.UseSqlServer(connectionString);
 });
 
@@ -21,20 +21,11 @@ var host = builder.Build();
 
 using (var scope = host.Services.CreateScope())
 {
-    try
-    {
-        var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-        var conf = builder.Configuration.GetSection("DB");
-        if (conf.GetValue<bool>("EnsureDeleted"))
-            db.Database.EnsureDeleted();
-        if (conf.GetValue<bool>("EnsureCreated"))
-            db.Database.EnsureCreated();
-    }
-    catch (Exception _)
-    {
-        //if multiple docker instances try to delete, it will throw error, ignore for now
-    }
-    
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    if (bool.TryParse(Environment.GetEnvironmentVariable("EnsureDeleted"), out var ensureDeleted) && ensureDeleted)
+        db.Database.EnsureDeleted();
+    if (bool.TryParse(Environment.GetEnvironmentVariable("EnsureCreated"), out var ensureCreated) && ensureCreated)
+        db.Database.EnsureCreated();
 }
 
 host.Run();

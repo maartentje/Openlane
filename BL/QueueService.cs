@@ -73,7 +73,7 @@ public class QueueService : IQueueService
             var body = ea.Body.ToArray();
             var message = Encoding.UTF8.GetString(body);
             var offer = JsonSerializer.Deserialize<Offer>(message)!;
-            _logger.LogInformation("[{id}] Received on queue", offer.Id);
+            _logger.LogInformation("[{id}] Received on queue", offer.IdOutdated);
             //The only reason to Wait() is to simulate 'long processing time'
             //This way, it won't process the next message when the first one is still busy
             //Easier to demo - logs show new process every ~5 seconds, but with multiple replicas it shows multiple process
@@ -86,13 +86,13 @@ public class QueueService : IQueueService
 
     public void PostToQueue(Offer offer)
     {
-        _logger.LogInformation("[{id}] Posting to queue", offer.Id);
+        _logger.LogInformation("[{id}] Posting to queue", offer.IdOutdated);
         var jsonString = JsonSerializer.Serialize(offer);
         var body = Encoding.UTF8.GetBytes(jsonString);
         _channel.BasicPublish(exchange: "",
             routingKey: "default",
             basicProperties: null,
             body: body);
-        _logger.LogInformation("[{id}] Posted to queue", offer.Id);
+        _logger.LogInformation("[{id}] Posted to queue", offer.IdOutdated);
     }
 }
