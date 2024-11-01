@@ -1,36 +1,38 @@
 ﻿services:
-  worker-base:
-    image: offerworker
+  event-processor-base:
+    image: eventprocessor
     build:
       context: .
-      dockerfile: OfferWorker/Dockerfile
+      dockerfile: EventProcessor/Dockerfile
     environment:
       - MSSQL_SA_PASSWORD=Password1*
       - EnsureCreated=true
-    restart: on-failure
+      - EnsureDeleted=false
+      - SeedDb=true
     depends_on:
       - rabbitmq
   
   # This way, the scaled workers won't try EnsureCreated()
-  worker-extra:
-    image: offerworker
+  event-processor-extra:
+    image: eventprocessor
     deploy:
-      replicas: 3
+      replicas: 1
     build:
       context: .
-      dockerfile: OfferWorker/Dockerfile
+      dockerfile: EventProcessor/Dockerfile
     environment:
       - MSSQL_SA_PASSWORD=Password1*
-    restart: on-failure
     depends_on:
       - rabbitmq
-      - worker-base
+      - event-processor-base
   
   api:
     image: api
     build:
       context: .
       dockerfile: API/Dockerfile
+    environment:
+      - MSSQL_SA_PASSWORD=Password1*
     restart: on-failure
     depends_on:
       - rabbitmq
@@ -38,7 +40,7 @@
       - "5000:8080"
       
   rabbitmq:
-    image: rabbitmq:3-management
+    image: masstransit/rabbitmq
     hostname: "rabbitmq"
     labels:
       NAME: "rabbitmq"

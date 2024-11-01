@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging.Console;
 namespace Shared;
 
 /// <summary>
-/// Uses a custom format so every (non-exception) message is prefixed with e.g. [0000-00-00 00:00:00 - Information] [OfferWorker] 
+/// Uses a custom format so every (non-exception) message is prefixed with e.g. [0000-00-00 00:00:00 - Information] [EventProcessor] 
 /// </summary>
 public sealed class LogFormatter() : ConsoleFormatter(FormatterName)
 {
